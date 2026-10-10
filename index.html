@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Field Survey - Zero-Cost Data Collection</title>
+  <title>Shop Survey Form - Zero-Cost Field Data Collection</title>
   <style>
     :root {
       --primary: #00695c;
       --primary-dark: #004d40;
       --primary-light: #e0f2f1;
-      --accent: #ff6f00;
-      --bg: #f5f7f8;
+      --accent: #f57c00;
+      --bg: #f8fafc;
       --surface: #ffffff;
-      --text: #1e293b;
+      --text: #0f172a;
       --text-muted: #64748b;
       --border: #e2e8f0;
       --success: #10b981;
       --error: #ef4444;
-      --radius: 12px;
-      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --radius: 14px;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
     }
 
     * {
@@ -33,11 +33,11 @@
       color: var(--text);
       line-height: 1.5;
       padding: 16px;
-      padding-bottom: 40px;
+      padding-bottom: 60px;
     }
 
     .container {
-      max-width: 600px;
+      max-width: 660px;
       margin: 0 auto;
     }
 
@@ -45,68 +45,169 @@
     header {
       background: linear-gradient(135deg, var(--primary-dark), var(--primary));
       color: white;
-      padding: 24px 20px;
+      padding: 22px 20px;
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      margin-bottom: 20px;
+      margin-bottom: 14px;
+    }
+
+    .header-top {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
+      margin-bottom: 6px;
     }
 
     .header-icon {
-      width: 48px;
-      height: 48px;
+      width: 44px;
+      height: 44px;
       background: rgba(255, 255, 255, 0.2);
       border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 26px;
+      font-size: 24px;
       flex-shrink: 0;
     }
 
     header h1 {
       font-size: 1.35rem;
       font-weight: 700;
-      margin-bottom: 4px;
+      letter-spacing: -0.3px;
     }
 
     header p {
-      font-size: 0.85rem;
-      color: var(--primary-light);
+      font-size: 0.86rem;
+      color: #b2dfdb;
+      margin-top: 2px;
     }
 
-    /* Configuration Banner */
-    .config-card {
+    .header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .target-sheet-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0, 0, 0, 0.28);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #e0f2f1;
+    }
+
+    .network-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .network-badge.online {
+      background: rgba(16, 185, 129, 0.25);
+      color: #a7f3d0;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+
+    .network-badge.offline {
+      background: rgba(239, 68, 68, 0.35);
+      color: #fecaca;
+      border: 1px solid rgba(239, 68, 68, 0.6);
+    }
+
+    /* Main Tab Navigation */
+    .tab-nav {
+      display: flex;
+      background: #e2e8f0;
+      padding: 4px;
+      border-radius: 12px;
+      margin-bottom: 14px;
+      gap: 4px;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: none;
+      background: transparent;
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active {
+      background: var(--surface);
+      color: var(--primary-dark);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+    }
+
+    .count-badge {
+      background: var(--accent);
+      color: white;
+      padding: 2px 7px;
+      border-radius: 10px;
+      font-size: 0.72rem;
+      font-weight: 800;
+    }
+
+    /* Top Control Bar */
+    .top-actions {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-sm {
+      padding: 8px 12px;
+      font-size: 0.82rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s;
+    }
+
+    .btn-sm:hover {
+      background: #f1f5f9;
+    }
+
+    /* Panels */
+    .expandable-panel {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 14px 16px;
+      padding: 16px;
       margin-bottom: 16px;
       box-shadow: var(--shadow);
-      font-size: 0.85rem;
-    }
-
-    .config-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      font-weight: 600;
-      color: var(--primary-dark);
-    }
-
-    .config-body {
-      margin-top: 10px;
       display: none;
     }
 
-    .config-body.open {
+    .expandable-panel.active {
       display: block;
     }
 
-    /* Form Cards */
     .card {
       background: var(--surface);
       border-radius: var(--radius);
@@ -117,13 +218,15 @@
     }
 
     .card-title {
-      font-size: 1rem;
+      font-size: 1.02rem;
       font-weight: 700;
       color: var(--primary-dark);
       margin-bottom: 14px;
       display: flex;
       align-items: center;
       gap: 8px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
     }
 
     .form-group {
@@ -145,20 +248,30 @@
     .required::after {
       content: " *";
       color: var(--error);
+      font-weight: bold;
+    }
+
+    .field-hint {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 4px;
     }
 
     input[type="text"],
+    input[type="tel"],
+    input[type="email"],
     input[type="url"],
     select,
     textarea {
       width: 100%;
-      padding: 12px 14px;
+      padding: 11px 13px;
       border: 1.5px solid var(--border);
       border-radius: 8px;
-      font-size: 0.95rem;
+      font-size: 0.94rem;
       color: var(--text);
       background: #fafafa;
-      transition: all 0.2s ease;
+      transition: all 0.2s;
       outline: none;
     }
 
@@ -171,11 +284,10 @@
     }
 
     textarea {
+      min-height: 80px;
       resize: vertical;
-      min-height: 85px;
     }
 
-    /* Buttons */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -183,9 +295,9 @@
       gap: 8px;
       width: 100%;
       padding: 14px 18px;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 1rem;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       border: none;
       transition: background 0.2s, transform 0.1s;
@@ -210,34 +322,20 @@
       border: 1px solid var(--border);
     }
 
-    .btn-secondary:hover {
-      background: #e2e8f0;
-    }
-
     .btn-outline {
       background: transparent;
       color: var(--primary);
       border: 1.5px dashed var(--primary);
     }
 
-    /* Location Box */
+    /* Location Card */
     .location-box {
-      background: var(--bg);
-      border: 1px dashed var(--border);
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
       border-radius: 8px;
       padding: 12px;
       margin-top: 10px;
       font-size: 0.88rem;
-    }
-
-    .location-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 4px;
-    }
-
-    .location-row:last-child {
-      margin-bottom: 0;
     }
 
     .badge {
@@ -245,34 +343,22 @@
       padding: 2px 8px;
       border-radius: 12px;
       font-size: 0.75rem;
-      font-weight: 600;
+      font-weight: 700;
     }
 
-    .badge-success {
-      background: #d1fae5;
-      color: #065f46;
-    }
+    .badge-success { background: #d1fae5; color: #065f46; }
+    .badge-warning { background: #fef3c7; color: #92400e; }
+    .badge-neutral { background: #e2e8f0; color: #475569; }
+    .badge-error { background: #fee2e2; color: #991b1b; }
 
-    .badge-warning {
-      background: #fef3c7;
-      color: #92400e;
-    }
-
-    /* Camera / Photo Preview */
-    .photo-input-container {
-      position: relative;
-      margin-bottom: 10px;
-    }
-
-    input[type="file"] {
-      display: none;
-    }
+    /* Photo Upload */
+    input[type="file"] { display: none; }
 
     .preview-container {
       display: none;
       margin-top: 12px;
       position: relative;
-      border-radius: 8px;
+      border-radius: 10px;
       overflow: hidden;
       border: 1px solid var(--border);
       max-height: 260px;
@@ -303,7 +389,7 @@
       font-size: 16px;
     }
 
-    /* Status Notifications */
+    /* Alerts */
     .status-card {
       display: none;
       padding: 16px;
@@ -338,7 +424,6 @@
       word-break: break-all;
     }
 
-    /* Spinner */
     .spinner {
       display: inline-block;
       width: 20px;
@@ -357,6 +442,79 @@
       opacity: 0.65;
       cursor: not-allowed;
     }
+
+    /* Drafts Queue Styles */
+    .draft-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      position: relative;
+    }
+
+    .draft-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+
+    .draft-item-title {
+      font-weight: 700;
+      font-size: 0.96rem;
+      color: var(--primary-dark);
+    }
+
+    .draft-item-meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .draft-body {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .draft-thumb {
+      width: 70px;
+      height: 70px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: #e2e8f0;
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .draft-info {
+      flex: 1;
+      font-size: 0.82rem;
+      line-height: 1.4;
+    }
+
+    .draft-actions {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+
+    .sync-banner {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1e40af;
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+    }
   </style>
 </head>
 <body>
@@ -364,242 +522,813 @@
 <div class="container">
   <!-- Header -->
   <header>
-    <div class="header-icon">📋</div>
-    <div>
-      <h1>Field Survey Collector</h1>
-      <p>Direct sync to Google Sheets & Drive • Zero Server Cost</p>
+    <div class="header-top">
+      <div class="header-icon">🏪</div>
+      <div>
+        <h1 id="formHeaderTitle">Shop survey form</h1>
+        <p id="formHeaderSubtitle">Complete the fields below. GPS and photograph access require device permissions.</p>
+      </div>
+    </div>
+    <div class="header-meta">
+      <div class="target-sheet-badge">
+        <span>📊 Target Sheet:</span>
+        <strong id="targetSheetBadgeText">Shop Surveys</strong>
+      </div>
+      <div id="networkStatusBadge" class="network-badge online">
+        <span id="networkStatusDot">🟢</span> <span id="networkStatusText">Online</span>
+      </div>
     </div>
   </header>
 
-  <!-- Apps Script Endpoint Configuration -->
-  <div class="config-card">
-    <div class="config-header" onclick="toggleConfig()">
-      <span>⚙️ Web App Endpoint Settings</span>
-      <span id="configToggleIcon">▼</span>
+  <!-- Main View Navigation Tabs -->
+  <div class="tab-nav">
+    <button class="tab-btn active" id="tabSurveyBtn" onclick="switchMainView('survey')">
+      📝 New Survey Form
+    </button>
+    <button class="tab-btn" id="tabDraftsBtn" onclick="switchMainView('drafts')">
+      ⏳ Drafts / Pending <span id="pendingCountBadge" class="count-badge" style="display:none;">0</span>
+    </button>
+  </div>
+
+  <!-- Top Action Bar -->
+  <div class="top-actions">
+    <button class="btn-sm" onclick="togglePanel('endpointPanel')">
+      ⚙️ Endpoint Settings
+    </button>
+    <button class="btn-sm" onclick="togglePanel('importPanel')">
+      📥 Import Schema (JSON)
+    </button>
+    <button class="btn-sm" onclick="resetToShopSurveyDefault()">
+      🔄 Reset Default
+    </button>
+  </div>
+
+  <!-- Endpoint Settings Panel -->
+  <div id="endpointPanel" class="expandable-panel">
+    <h3 style="font-size: 0.95rem; margin-bottom: 8px;">⚙️ Google Apps Script Web App Endpoint</h3>
+    <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 10px;">
+      Paste your deployed Apps Script Web App URL below (deployed with Access: "Anyone"):
+    </p>
+    <input type="url" id="scriptEndpointUrl" placeholder="https://script.google.com/macros/s/.../exec">
+    <div style="display: flex; gap: 8px; margin-top: 10px;">
+      <button class="btn-sm" style="background: var(--primary); color: white;" onclick="saveConfigUrl()">Save URL</button>
+      <button class="btn-sm" onclick="testEndpointConnection()">Test Connection</button>
+      <button class="btn-sm" onclick="togglePanel('endpointPanel')">Close</button>
     </div>
-    <div class="config-body" id="configBody">
-      <p style="margin-bottom: 8px; color: var(--text-muted);">
-        Enter your Google Apps Script Web App URL below (deployed with access: "Anyone"):
-      </p>
-      <input type="url" id="scriptEndpointUrl" placeholder="https://script.google.com/macros/s/.../exec">
-      <button class="btn btn-secondary" style="margin-top: 8px; padding: 8px 12px; font-size: 0.85rem;" onclick="saveConfigUrl()">Save Endpoint</button>
+    <div id="endpointTestResult" style="margin-top: 8px; font-size: 0.82rem; display: none;"></div>
+  </div>
+
+  <!-- Import Questionnaire Schema Panel -->
+  <div id="importPanel" class="expandable-panel">
+    <h3 style="font-size: 0.95rem; margin-bottom: 8px;">📥 Import Questionnaire JSON Schema</h3>
+    <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 10px;">
+      Select a <code>.json</code> file or paste JSON below. Must include <code>"sheet-name"</code> and <code>"fields"</code> array:
+    </p>
+    <input type="file" id="schemaFileInput" accept=".json,application/json" onchange="handleSchemaFileUpload(event)">
+    <div style="margin-bottom: 10px;">
+      <button class="btn-sm" onclick="document.getElementById('schemaFileInput').click()">📁 Choose JSON File</button>
+      <button class="btn-sm" onclick="copyCurrentSchema()">📋 Copy Current Schema JSON</button>
+    </div>
+    <textarea id="schemaJsonText" placeholder="Paste schema JSON here..." style="font-family: monospace; font-size: 0.8rem; min-height: 120px;"></textarea>
+    <div style="display: flex; gap: 8px; margin-top: 10px;">
+      <button class="btn-sm" style="background: var(--primary); color: white;" onclick="applySchemaFromJsonText()">Apply Schema</button>
+      <button class="btn-sm" onclick="togglePanel('importPanel')">Close</button>
     </div>
   </div>
 
-  <!-- Status Alert Card -->
+  <!-- Status / Error Notification Card -->
   <div id="statusAlert" class="status-card">
-    <h4 id="statusTitle" style="font-size: 1rem; margin-bottom: 4px;"></h4>
-    <p id="statusMessage" style="font-size: 0.9rem;"></p>
+    <h4 id="statusTitle" style="font-size: 1.05rem; margin-bottom: 4px; font-weight: 700;"></h4>
+    <p id="statusMessage" style="font-size: 0.9rem; line-height: 1.4;"></p>
     <div id="statusLinks" class="status-links"></div>
+    <div id="retryContainer" style="margin-top: 12px; display: none;">
+      <button class="btn-sm" style="background: var(--error); color: white;" onclick="retryLastSubmission()">
+        🔄 Retry Uploading to Sheet
+      </button>
+      <button class="btn-sm" style="background: var(--primary); color: white;" onclick="switchMainView('drafts')">
+        📂 View in Drafts / Pending Queue
+      </button>
+    </div>
   </div>
 
-  <!-- Survey Form -->
-  <form id="surveyForm" onsubmit="handleFormSubmit(event)">
-    
-    <!-- Surveyor Information -->
-    <div class="card">
-      <div class="card-title">👤 Surveyor Information</div>
-      <div class="form-group">
-        <label for="surveyorName" class="required">Surveyor Full Name</label>
-        <input type="text" id="surveyorName" name="surveyorName" placeholder="e.g. Jane Doe" required>
-      </div>
+  <!-- Connection Restored Auto-Sync Notification Banner -->
+  <div id="onlineSyncBanner" class="sync-banner" style="display: none;">
+    <div>
+      <strong>🌐 Connection Restored:</strong> You have pending submissions cached offline.
     </div>
+    <button class="btn-sm" style="background: var(--primary); color: white;" onclick="syncAllPendingSubmissions()">
+      Sync All Now
+    </button>
+  </div>
 
-    <!-- Questionnaire -->
-    <div class="card">
-      <div class="card-title">📝 Questionnaire</div>
-      
-      <div class="form-group">
-        <label for="siteName" class="required">1. Site Name / Identifier</label>
-        <input type="text" id="siteName" name="siteName" placeholder="e.g. Solar Station Sector 4B" required>
+  <!-- ================= VIEW 1: SURVEY FORM VIEW ================= -->
+  <div id="surveyFormView">
+    <form id="dynamicSurveyForm" onsubmit="handleFormSubmit(event)">
+      <div id="formFieldsContainer">
+        <!-- Rendered dynamically via JavaScript -->
       </div>
 
-      <div class="form-group">
-        <label for="conditionRating" class="required">2. Condition Rating</label>
-        <select id="conditionRating" name="conditionRating" required>
-          <option value="" disabled selected>Select rating...</option>
-          <option value="Excellent">Excellent - Like new / fully functional</option>
-          <option value="Good">Good - Minor cosmetic wear</option>
-          <option value="Fair">Fair - Operational with issues</option>
-          <option value="Poor">Poor - Severe degradation / non-functional</option>
-        </select>
+      <div style="display: flex; gap: 10px; margin-top: 18px;">
+        <button type="submit" class="btn btn-primary" id="submitBtn" style="flex: 2;">
+          <span id="submitBtnText">📤 Submit Record to Google Sheet</span>
+          <span id="submitBtnSpinner" class="spinner" style="display: none;"></span>
+        </button>
+
+        <button type="button" class="btn btn-secondary" onclick="saveAsManualDraft()" style="flex: 1;" title="Save locally without publishing yet">
+          💾 Save Draft
+        </button>
       </div>
+    </form>
+  </div>
 
-      <div class="form-group">
-        <label for="observations">3. Observations / Field Notes</label>
-        <textarea id="observations" name="observations" placeholder="Record equipment serial numbers, damage details, hazards, or maintenance recommendations..."></textarea>
-      </div>
-    </div>
-
-    <!-- GPS Location Section -->
-    <div class="card">
-      <div class="card-title">📍 GPS Geolocation</div>
-      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">
-        Acquire device GPS coordinates to geotag this field survey.
-      </p>
-
-      <button type="button" class="btn btn-secondary" id="fetchLocationBtn" onclick="fetchCurrentLocation()">
-        🎯 Fetch Current GPS Location
-      </button>
-
-      <div id="locationDisplay" class="location-box" style="display: none;">
-        <div class="location-row">
-          <span><strong>Latitude:</strong> <span id="latValue">-</span></span>
-          <span><strong>Longitude:</strong> <span id="lngValue">-</span></span>
+  <!-- ================= VIEW 2: DRAFTS & PENDING QUEUE VIEW ================= -->
+  <div id="draftsQueueView" style="display: none;">
+    <div class="card" style="padding: 16px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <div>
+          <h2 style="font-size: 1.1rem; font-weight: 700; color: var(--primary-dark);">Drafts & Offline Outbox</h2>
+          <p style="font-size: 0.8rem; color: var(--text-muted);">
+            Cached in device storage (IndexedDB). Submissions stay safe offline and can be uploaded anytime.
+          </p>
         </div>
-        <div class="location-row" style="margin-top: 6px;">
-          <span>Accuracy: <span id="accValue">-</span></span>
-          <span id="accBadge" class="badge badge-success">Acquired</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Photo Capture Section -->
-    <div class="card">
-      <div class="card-title">📷 Field Photo Attachment</div>
-      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">
-        Capture a live photo using your device camera or upload from files.
-      </p>
-
-      <div class="photo-input-container">
-        <!-- Native Camera capture attribute enabled -->
-        <input type="file" id="photoInput" accept="image/*" capture="environment" onchange="handlePhotoSelected(event)">
-        <button type="button" class="btn btn-outline" onclick="document.getElementById('photoInput').click()">
-          📸 Take Photo / Select Image
+        <button class="btn-sm" id="syncAllBtn" style="background: var(--primary); color: white; padding: 10px 14px;" onclick="syncAllPendingSubmissions()">
+          ⚡ Sync All Pending (<span id="syncAllCount">0</span>)
         </button>
       </div>
 
-      <div class="preview-container" id="photoPreviewContainer">
-        <img id="photoPreview" alt="Survey Photo Preview">
-        <button type="button" class="remove-photo-btn" onclick="clearPhoto()" title="Remove photo">✕</button>
+      <div id="draftsListContainer">
+        <!-- Rendered dynamically from IndexedDB -->
       </div>
     </div>
+  </div>
 
-    <!-- Submit Button -->
-    <button type="submit" class="btn btn-primary" id="submitBtn">
-      <span id="submitBtnText">📤 Submit Field Survey</span>
-      <span id="submitBtnSpinner" class="spinner" style="display: none;"></span>
-    </button>
-  </form>
 </div>
 
 <script>
-  // App State
+  // 1. DEFAULT SHOP SURVEY FORM SCHEMA (FIELD 1 IS AN EDITABLE TEXT FIELD)
+  const DEFAULT_SHOP_SURVEY_SCHEMA = {
+    "title": "Shop survey form",
+    "description": "Complete the fields below. GPS and photograph access require device permissions.",
+    "sheet-name": "Shop Surveys",
+    "fields": [
+      {
+        "id": "serialNumber",
+        "label": "1. Serial number",
+        "type": "text",
+        "hint": "Enter serial number or use suggested value.",
+        "placeholder": "e.g., SHP-1001",
+        "required": false
+      },
+      {
+        "id": "fieldFormation",
+        "label": "2. Field formation",
+        "type": "text",
+        "hint": "e.g., Corporate Zone / Circle",
+        "placeholder": "Enter Field formation",
+        "required": true
+      },
+      {
+        "id": "area",
+        "label": "3. Area",
+        "type": "text",
+        "hint": "Area / market",
+        "placeholder": "Enter Area / market",
+        "required": true
+      },
+      {
+        "id": "shopExactAddress",
+        "label": "4. Shop's exact address",
+        "type": "textarea",
+        "hint": "Shop number, street, market, city",
+        "placeholder": "Shop number, street, market, city",
+        "required": true
+      },
+      {
+        "id": "geoLocation",
+        "label": "5. Geo-tagged location",
+        "type": "location",
+        "hint": "Allow location permission when prompted. Coordinates are captured only after you press the button.",
+        "required": true
+      },
+      {
+        "id": "shopName",
+        "label": "6. Name of the shop",
+        "type": "text",
+        "hint": "Enter shop name",
+        "placeholder": "e.g., Green Valley Store",
+        "required": true
+      },
+      {
+        "id": "ownerName",
+        "label": "7. Name of the owner",
+        "type": "text",
+        "hint": "Enter owner name",
+        "placeholder": "e.g., Muhammad Tariq",
+        "required": true
+      },
+      {
+        "id": "ntnCnic",
+        "label": "8. NTN / CNIC",
+        "type": "text",
+        "hint": "Enter applicable identifier",
+        "placeholder": "e.g., 35201-1234567-1 or NTN-12345",
+        "required": true
+      },
+      {
+        "id": "contactNumber",
+        "label": "9. Contact number",
+        "type": "tel",
+        "hint": "03XXXXXXXXX",
+        "placeholder": "03XXXXXXXXX",
+        "required": true
+      },
+      {
+        "id": "filerStatus",
+        "label": "10. Filer / non-filer status",
+        "type": "select",
+        "hint": "Select status",
+        "options": ["Filer", "Non-Filer"],
+        "required": true
+      },
+      {
+        "id": "emailId",
+        "label": "11. Email ID",
+        "type": "email",
+        "hint": "name@example.com",
+        "placeholder": "name@example.com",
+        "required": false
+      },
+      {
+        "id": "remarks",
+        "label": "12. Remarks, if any",
+        "type": "textarea",
+        "hint": "Observations / follow-up required",
+        "placeholder": "Observations / follow-up required",
+        "required": false
+      },
+      {
+        "id": "shopPicture",
+        "label": "13. Shop picture",
+        "type": "photo",
+        "hint": "Prototype stores a compressed preview in the local browser. Production should use approved protected storage.",
+        "required": true
+      }
+    ]
+  };
+
+  // State Management
+  let currentSchema = JSON.parse(JSON.stringify(DEFAULT_SHOP_SURVEY_SCHEMA));
   let capturedBase64 = "";
   let capturedPhotoName = "";
   let capturedPhotoMime = "image/jpeg";
   let gpsCoords = { latitude: null, longitude: null, accuracy: null };
+  let lastFailedSubmissionId = null;
 
-  // Default endpoint key in localStorage
-  const ENDPOINT_STORAGE_KEY = "field_survey_apps_script_url";
+  const STORAGE_SCHEMA_KEY = "field_survey_active_schema_v3";
+  const STORAGE_ENDPOINT_KEY = "field_survey_apps_script_url";
+  const STORAGE_SERIAL_COUNTER_KEY = "field_survey_serial_counter";
 
+  // =========================================================================
+  // 2. INDEXEDDB CLIENT-SIDE STORAGE ENGINE FOR FIELD DRAFTS & OFFLINE QUEUE
+  // =========================================================================
+  const DB_NAME = "FieldSurveyOfflineDB";
+  const DB_VERSION = 1;
+  const STORE_PENDING = "pending_surveys";
+
+  let dbPromise = null;
+
+  function getDB() {
+    if (dbPromise) return dbPromise;
+    dbPromise = new Promise((resolve, reject) => {
+      if (!window.indexedDB) {
+        console.warn("IndexedDB not supported, will use localStorage fallback");
+        resolve(null);
+        return;
+      }
+      const req = window.indexedDB.open(DB_NAME, DB_VERSION);
+      req.onupgradeneeded = (e) => {
+        const db = e.target.result;
+        if (!db.objectStoreNames.contains(STORE_PENDING)) {
+          const store = db.createObjectStore(STORE_PENDING, { keyPath: "id" });
+          store.createIndex("timestamp", "timestamp", { unique: false });
+          store.createIndex("status", "status", { unique: false });
+        }
+      };
+      req.onsuccess = (e) => resolve(e.target.result);
+      req.onerror = (e) => {
+        console.error("IndexedDB error:", e);
+        resolve(null); // Fallback to localStorage
+      };
+    });
+    return dbPromise;
+  }
+
+  async function savePendingSubmissionToDB(submission) {
+    const db = await getDB();
+    if (db) {
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction(STORE_PENDING, "readwrite");
+        const store = tx.objectStore(STORE_PENDING);
+        store.put(submission);
+        tx.oncomplete = () => {
+          updatePendingCountBadge();
+          resolve(submission.id);
+        };
+        tx.onerror = () => reject(tx.error);
+      });
+    } else {
+      // LocalStorage fallback
+      const list = getLocalStoragePending();
+      const existingIdx = list.findIndex(item => item.id === submission.id);
+      if (existingIdx >= 0) {
+        list[existingIdx] = submission;
+      } else {
+        list.unshift(submission);
+      }
+      try {
+        localStorage.setItem("offline_pending_surveys_fallback", JSON.stringify(list));
+      } catch(err) {
+        console.error("Storage full:", err);
+      }
+      updatePendingCountBadge();
+      return submission.id;
+    }
+  }
+
+  async function getAllPendingFromDB() {
+    const db = await getDB();
+    if (db) {
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction(STORE_PENDING, "readonly");
+        const store = tx.objectStore(STORE_PENDING);
+        const req = store.getAll();
+        req.onsuccess = () => {
+          const items = req.result || [];
+          items.sort((a, b) => b.timestamp - a.timestamp);
+          resolve(items);
+        };
+        req.onerror = () => resolve([]);
+      });
+    } else {
+      return getLocalStoragePending();
+    }
+  }
+
+  async function removePendingFromDB(id) {
+    const db = await getDB();
+    if (db) {
+      return new Promise((resolve) => {
+        const tx = db.transaction(STORE_PENDING, "readwrite");
+        const store = tx.objectStore(STORE_PENDING);
+        store.delete(id);
+        tx.oncomplete = () => {
+          updatePendingCountBadge();
+          resolve();
+        };
+      });
+    } else {
+      const list = getLocalStoragePending().filter(item => item.id !== id);
+      localStorage.setItem("offline_pending_surveys_fallback", JSON.stringify(list));
+      updatePendingCountBadge();
+    }
+  }
+
+  function getLocalStoragePending() {
+    try {
+      const raw = localStorage.getItem("offline_pending_surveys_fallback");
+      return raw ? JSON.parse(raw) : [];
+    } catch(e) {
+      return [];
+    }
+  }
+
+  async function updatePendingCountBadge() {
+    const list = await getAllPendingFromDB();
+    const count = list.length;
+    const badge = document.getElementById("pendingCountBadge");
+    const syncCount = document.getElementById("syncAllCount");
+    const syncBtn = document.getElementById("syncAllBtn");
+
+    if (badge) {
+      if (count > 0) {
+        badge.style.display = "inline-block";
+        badge.textContent = count;
+      } else {
+        badge.style.display = "none";
+      }
+    }
+    if (syncCount) syncCount.textContent = count;
+    if (syncBtn) syncBtn.disabled = count === 0;
+
+    // Show online sync banner if online and has pending items
+    const banner = document.getElementById("onlineSyncBanner");
+    if (banner) {
+      banner.style.display = (navigator.onLine && count > 0) ? "flex" : "none";
+    }
+  }
+
+  // =========================================================================
+  // 3. UI INITIALIZATION & NETWORK LISTENERS
+  // =========================================================================
   window.addEventListener("DOMContentLoaded", () => {
-    const savedUrl = localStorage.getItem(ENDPOINT_STORAGE_KEY);
+    // 1. Load endpoint URL
+    const savedUrl = localStorage.getItem(STORAGE_ENDPOINT_KEY);
     if (savedUrl) {
       document.getElementById("scriptEndpointUrl").value = savedUrl;
     } else {
-      // Prompt user to configure if empty
-      toggleConfig(true);
+      togglePanel("endpointPanel", true);
     }
+
+    // 2. Load custom schema if saved
+    const savedSchema = localStorage.getItem(STORAGE_SCHEMA_KEY);
+    if (savedSchema) {
+      try {
+        currentSchema = JSON.parse(savedSchema);
+      } catch (e) {
+        currentSchema = JSON.parse(JSON.stringify(DEFAULT_SHOP_SURVEY_SCHEMA));
+      }
+    }
+
+    renderCurrentSchemaForm();
+    updateNetworkStatusUI();
+    updatePendingCountBadge();
   });
 
-  function toggleConfig(forceOpen) {
-    const body = document.getElementById("configBody");
-    const icon = document.getElementById("configToggleIcon");
-    if (forceOpen === true) {
-      body.classList.add("open");
-      icon.textContent = "▲";
+  window.addEventListener("online", () => {
+    updateNetworkStatusUI();
+    updatePendingCountBadge();
+    showNotification("success", "Connection Restored", "Your device is back online. You can now sync pending drafts.");
+  });
+
+  window.addEventListener("offline", () => {
+    updateNetworkStatusUI();
+    showNotification("error", "Offline Mode Active", "No internet detected. Submissions will be cached in device storage (IndexedDB) for later sync.");
+  });
+
+  function updateNetworkStatusUI() {
+    const badge = document.getElementById("networkStatusBadge");
+    const dot = document.getElementById("networkStatusDot");
+    const text = document.getElementById("networkStatusText");
+
+    if (navigator.onLine) {
+      badge.className = "network-badge online";
+      dot.textContent = "🟢";
+      text.textContent = "Online";
     } else {
-      const isOpen = body.classList.toggle("open");
-      icon.textContent = isOpen ? "▲" : "▼";
+      badge.className = "network-badge offline";
+      dot.textContent = "🔴";
+      text.textContent = "Offline";
+    }
+  }
+
+  function switchMainView(view) {
+    const surveyView = document.getElementById("surveyFormView");
+    const draftsView = document.getElementById("draftsQueueView");
+    const tabSurveyBtn = document.getElementById("tabSurveyBtn");
+    const tabDraftsBtn = document.getElementById("tabDraftsBtn");
+
+    if (view === "drafts") {
+      surveyView.style.display = "none";
+      draftsView.style.display = "block";
+      tabSurveyBtn.classList.remove("active");
+      tabDraftsBtn.classList.add("active");
+      renderDraftsQueueView();
+    } else {
+      surveyView.style.display = "block";
+      draftsView.style.display = "none";
+      tabSurveyBtn.classList.add("active");
+      tabDraftsBtn.classList.remove("active");
+    }
+  }
+
+  function togglePanel(id, forceOpen) {
+    const el = document.getElementById(id);
+    if (forceOpen === true) {
+      el.classList.add("active");
+    } else if (forceOpen === false) {
+      el.classList.remove("active");
+    } else {
+      el.classList.toggle("active");
     }
   }
 
   function saveConfigUrl() {
     const url = document.getElementById("scriptEndpointUrl").value.trim();
     if (url) {
-      localStorage.setItem(ENDPOINT_STORAGE_KEY, url);
-      showAlert("success", "Saved", "Apps Script endpoint URL saved successfully.");
-      toggleConfig(false);
+      localStorage.setItem(STORAGE_ENDPOINT_KEY, url);
+      showNotification("success", "Endpoint Saved", "Google Apps Script Web App URL saved successfully.");
+      togglePanel("endpointPanel", false);
     } else {
-      showAlert("error", "Error", "Please enter a valid Apps Script Web App URL.");
+      showNotification("error", "Invalid URL", "Please enter a valid HTTP/HTTPS URL.");
     }
   }
 
-  // Geolocation Handler
-  function fetchCurrentLocation() {
-    const btn = document.getElementById("fetchLocationBtn");
-    const display = document.getElementById("locationDisplay");
-
-    if (!navigator.geolocation) {
-      showAlert("error", "Geolocation Error", "Geolocation is not supported by your browser.");
+  async function testEndpointConnection() {
+    const url = document.getElementById("scriptEndpointUrl").value.trim();
+    const resultDiv = document.getElementById("endpointTestResult");
+    if (!url) {
+      resultDiv.style.display = "block";
+      resultDiv.style.color = "var(--error)";
+      resultDiv.textContent = "Please enter a Web App URL first.";
       return;
     }
 
-    btn.disabled = true;
-    btn.innerHTML = `<span class="spinner" style="border-top-color: #333; margin-right: 6px;"></span> Acquiring satellite lock...`;
+    resultDiv.style.display = "block";
+    resultDiv.style.color = "var(--text-muted)";
+    resultDiv.textContent = "Testing connection to Apps Script...";
+
+    try {
+      const response = await fetch(url, { method: "GET" });
+      const data = await response.json();
+      resultDiv.style.color = "var(--success)";
+      resultDiv.textContent = `Online! Server connected: ${data.name || "Apps Script Active"}`;
+    } catch (err) {
+      resultDiv.style.color = "var(--error)";
+      resultDiv.textContent = `Could not reach Apps Script: ${err.message}. Ensure deployment Access is set to 'Anyone'.`;
+    }
+  }
+
+  function resetToShopSurveyDefault() {
+    if (confirm("Reset form back to default Shop survey form?")) {
+      currentSchema = JSON.parse(JSON.stringify(DEFAULT_SHOP_SURVEY_SCHEMA));
+      localStorage.removeItem(STORAGE_SCHEMA_KEY);
+      renderCurrentSchemaForm();
+      showNotification("success", "Reset Completed", "Default Shop survey form has been restored.");
+    }
+  }
+
+  // =========================================================================
+  // 4. DYNAMIC FORM RENDERING (SERIAL NUMBER AS EDITABLE TEXT FIELD)
+  // =========================================================================
+  function renderCurrentSchemaForm() {
+    document.getElementById("formHeaderTitle").textContent = currentSchema.title || "Field Survey Form";
+    document.getElementById("formHeaderSubtitle").textContent = currentSchema.description || "Complete the survey fields.";
+    const sheetName = currentSchema["sheet-name"] || currentSchema.sheetName || "Shop Surveys";
+    document.getElementById("targetSheetBadgeText").textContent = sheetName;
+
+    const container = document.getElementById("formFieldsContainer");
+    container.innerHTML = "";
+
+    let currentCard = createCardElement("Survey Questionnaire");
+    container.appendChild(currentCard);
+
+    const suggestedSerial = getNextSerialNumberPreview();
+
+    currentSchema.fields.forEach((field) => {
+      const group = document.createElement("div");
+      group.className = "form-group";
+
+      const label = document.createElement("label");
+      label.htmlFor = `field_${field.id}`;
+      label.textContent = field.label;
+      if (field.required) label.classList.add("required");
+      group.appendChild(label);
+
+      // Question 1: Serial number is an editable text field
+      if (field.id === "serialNumber" || field.type === "auto_serial") {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.id = `field_${field.id}`;
+        input.value = suggestedSerial;
+        input.placeholder = field.placeholder || "e.g., SHP-1001";
+        input.style.fontWeight = "bold";
+        group.appendChild(input);
+
+        const hint = document.createElement("span");
+        hint.className = "field-hint";
+        hint.textContent = field.hint || "Enter serial number or use the suggested value above.";
+        group.appendChild(hint);
+        currentCard.appendChild(group);
+
+      } else if (field.type === "location") {
+        const locCard = document.createElement("div");
+        locCard.className = "location-box";
+        locCard.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-weight:600;">Status: <span id="locStatusBadge" class="badge badge-warning">Not captured</span></span>
+            <button type="button" class="btn-sm" style="background:var(--primary); color:white;" onclick="fetchCurrentLocation()">
+              📍 Capture phone GPS
+            </button>
+          </div>
+          <div id="locCoordinatesView" style="display:none; font-size:0.85rem;">
+            <div><strong>Latitude:</strong> <span id="latDisplay">-</span> | <strong>Longitude:</strong> <span id="lngDisplay">-</span></div>
+            <div style="color:var(--text-muted); margin-top:2px;">Accuracy: <span id="accDisplay">-</span></div>
+          </div>
+        `;
+        group.appendChild(locCard);
+
+        const hint = document.createElement("span");
+        hint.className = "field-hint";
+        hint.textContent = field.hint || "Allow location permission when prompted. Coordinates are captured only after you press the button.";
+        group.appendChild(hint);
+        currentCard.appendChild(group);
+
+      } else if (field.type === "photo") {
+        const photoDiv = document.createElement("div");
+        photoDiv.innerHTML = `
+          <input type="file" id="photoInput" accept="image/*" capture="environment" onchange="handlePhotoSelected(event)">
+          <div style="display:flex; gap:8px;">
+            <button type="button" class="btn btn-outline" style="padding:10px;" onclick="document.getElementById('photoInput').click()">
+              📷 Take Photo / Choose Picture
+            </button>
+          </div>
+          <div class="preview-container" id="photoPreviewContainer">
+            <img id="photoPreview" alt="Survey Photo">
+            <button type="button" class="remove-photo-btn" onclick="clearPhoto()">✕</button>
+          </div>
+        `;
+        group.appendChild(photoDiv);
+
+        const hint = document.createElement("span");
+        hint.className = "field-hint";
+        hint.textContent = field.hint || "Prototype stores a compressed preview in the local browser. Production should use approved protected storage.";
+        group.appendChild(hint);
+        currentCard.appendChild(group);
+
+      } else if (field.type === "select") {
+        const select = document.createElement("select");
+        select.id = `field_${field.id}`;
+        if (field.required) select.required = true;
+
+        const defaultOption = document.createElement("option");
+        defaultOption.value = "";
+        defaultOption.textContent = field.placeholder || "Select status...";
+        select.appendChild(defaultOption);
+
+        (field.options || []).forEach((opt) => {
+          const optEl = document.createElement("option");
+          optEl.value = opt;
+          optEl.textContent = opt;
+          select.appendChild(optEl);
+        });
+        group.appendChild(select);
+
+        if (field.hint) {
+          const hint = document.createElement("span");
+          hint.className = "field-hint";
+          hint.textContent = field.hint;
+          group.appendChild(hint);
+        }
+        currentCard.appendChild(group);
+
+      } else if (field.type === "textarea") {
+        const textarea = document.createElement("textarea");
+        textarea.id = `field_${field.id}`;
+        textarea.placeholder = field.placeholder || field.hint || "";
+        if (field.required) textarea.required = true;
+        group.appendChild(textarea);
+
+        if (field.hint) {
+          const hint = document.createElement("span");
+          hint.className = "field-hint";
+          hint.textContent = field.hint;
+          group.appendChild(hint);
+        }
+        currentCard.appendChild(group);
+
+      } else {
+        const input = document.createElement("input");
+        input.type = field.type === "phone" || field.type === "tel" ? "tel" : (field.type === "email" ? "email" : "text");
+        input.id = `field_${field.id}`;
+        input.placeholder = field.placeholder || field.hint || "";
+        if (field.required) input.required = true;
+        group.appendChild(input);
+
+        if (field.hint) {
+          const hint = document.createElement("span");
+          hint.className = "field-hint";
+          hint.textContent = field.hint;
+          group.appendChild(hint);
+        }
+        currentCard.appendChild(group);
+      }
+    });
+  }
+
+  function createCardElement(title) {
+    const card = document.createElement("div");
+    card.className = "card";
+    const header = document.createElement("div");
+    header.className = "card-title";
+    header.textContent = title;
+    card.appendChild(header);
+    return card;
+  }
+
+  function getNextSerialNumberPreview() {
+    let count = parseInt(localStorage.getItem(STORAGE_SERIAL_COUNTER_KEY) || "1001", 10);
+    return `SHP-${count}`;
+  }
+
+  function incrementSerialNumber() {
+    let count = parseInt(localStorage.getItem(STORAGE_SERIAL_COUNTER_KEY) || "1001", 10);
+    localStorage.setItem(STORAGE_SERIAL_COUNTER_KEY, (count + 1).toString());
+  }
+
+  // Schema Import
+  function handleSchemaFileUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const parsed = JSON.parse(e.target.result);
+        validateAndApplySchema(parsed);
+      } catch (err) {
+        showNotification("error", "Invalid JSON", "Could not parse the selected file: " + err.message);
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  function applySchemaFromJsonText() {
+    const text = document.getElementById("schemaJsonText").value.trim();
+    if (!text) {
+      showNotification("error", "Empty JSON", "Please paste valid JSON schema text.");
+      return;
+    }
+    try {
+      const parsed = JSON.parse(text);
+      validateAndApplySchema(parsed);
+    } catch (err) {
+      showNotification("error", "JSON Error", "Invalid JSON format: " + err.message);
+    }
+  }
+
+  function validateAndApplySchema(schema) {
+    if (!schema.fields || !Array.isArray(schema.fields) || schema.fields.length === 0) {
+      showNotification("error", "Schema Validation Error", "JSON must contain a non-empty 'fields' array.");
+      return;
+    }
+
+    if (!schema["sheet-name"] && !schema.sheetName) {
+      schema["sheet-name"] = "Custom Survey";
+    }
+
+    currentSchema = schema;
+    localStorage.setItem(STORAGE_SCHEMA_KEY, JSON.stringify(schema));
+    renderCurrentSchemaForm();
+    togglePanel("importPanel", false);
+    showNotification("success", "Schema Imported! 🎉", `Active form: "${schema.title || 'Custom Survey'}". Target sheet: "${schema['sheet-name'] || schema.sheetName}".`);
+  }
+
+  function copyCurrentSchema() {
+    const text = JSON.stringify(currentSchema, null, 2);
+    navigator.clipboard.writeText(text).then(() => {
+      alert("Current schema JSON copied to clipboard!");
+    }).catch(() => {
+      document.getElementById("schemaJsonText").value = text;
+    });
+  }
+
+  // GPS Geolocation
+  function fetchCurrentLocation() {
+    const badge = document.getElementById("locStatusBadge");
+    const view = document.getElementById("locCoordinatesView");
+
+    if (!navigator.geolocation) {
+      showNotification("error", "GPS Error", "Geolocation is not supported by your browser.");
+      return;
+    }
+
+    badge.className = "badge badge-neutral";
+    badge.textContent = "Acquiring satellite lock...";
 
     navigator.geolocation.getCurrentPosition(
-      (position) => {
-        gpsCoords.latitude = position.coords.latitude;
-        gpsCoords.longitude = position.coords.longitude;
-        gpsCoords.accuracy = Math.round(position.coords.accuracy);
+      (pos) => {
+        gpsCoords.latitude = pos.coords.latitude;
+        gpsCoords.longitude = pos.coords.longitude;
+        gpsCoords.accuracy = Math.round(pos.coords.accuracy);
 
-        document.getElementById("latValue").textContent = gpsCoords.latitude.toFixed(6);
-        document.getElementById("lngValue").textContent = gpsCoords.longitude.toFixed(6);
-        document.getElementById("accValue").textContent = `±${gpsCoords.accuracy}m`;
+        document.getElementById("latDisplay").textContent = gpsCoords.latitude.toFixed(6);
+        document.getElementById("lngDisplay").textContent = gpsCoords.longitude.toFixed(6);
+        document.getElementById("accDisplay").textContent = `±${gpsCoords.accuracy}m`;
 
-        const badge = document.getElementById("accBadge");
-        if (gpsCoords.accuracy <= 15) {
-          badge.className = "badge badge-success";
-          badge.textContent = "High Precision";
-        } else {
-          badge.className = "badge badge-warning";
-          badge.textContent = "Moderate Precision";
-        }
-
-        display.style.display = "block";
-        btn.disabled = false;
-        btn.innerHTML = "🎯 Update Current GPS Location";
+        view.style.display = "block";
+        badge.className = "badge badge-success";
+        badge.textContent = `Locked (±${gpsCoords.accuracy}m)`;
       },
-      (error) => {
-        btn.disabled = false;
-        btn.innerHTML = "🎯 Fetch Current GPS Location";
-        let message = "Unable to retrieve location.";
-        switch (error.code) {
-          case error.PERMISSION_DENIED:
-            message = "Location permission denied. Please allow location access in your browser.";
-            break;
-          case error.POSITION_UNAVAILABLE:
-            message = "Location information is currently unavailable.";
-            break;
-          case error.TIMEOUT:
-            message = "Location request timed out. Try again outside.";
-            break;
-        }
-        showAlert("error", "GPS Error", message);
+      (err) => {
+        badge.className = "badge badge-warning";
+        badge.textContent = "Capture failed";
+        showNotification("error", "GPS Error", `Could not get coordinates: ${err.message}. Please allow location permission.`);
       },
-      {
-        enableHighAccuracy: true,
-        timeout: 20000,
-        maximumAge: 0
-      }
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 0 }
     );
   }
 
-  // Photo Handling with client-side downscaling for rapid network upload
+  // Photo Capture & Client Compression
   function handlePhotoSelected(event) {
     const file = event.target.files[0];
     if (!file) return;
 
-    capturedPhotoName = file.name || "field_survey_photo.jpg";
+    capturedPhotoName = file.name || "shop_survey_photo.jpg";
     capturedPhotoMime = file.type || "image/jpeg";
 
     const reader = new FileReader();
     reader.onload = (e) => {
       const img = new Image();
       img.onload = () => {
-        // Resize down if photo is huge to ensure fast upload to Apps Script
         const maxDim = 1600;
         let width = img.width;
         let height = img.height;
@@ -620,12 +1349,9 @@
         const ctx = canvas.getContext("2d");
         ctx.drawImage(img, 0, 0, width, height);
 
-        // Convert to optimized JPEG
         capturedBase64 = canvas.toDataURL("image/jpeg", 0.82);
 
-        // Display preview
-        const preview = document.getElementById("photoPreview");
-        preview.src = capturedBase64;
+        document.getElementById("photoPreview").src = capturedBase64;
         document.getElementById("photoPreviewContainer").style.display = "block";
       };
       img.src = e.target.result;
@@ -641,92 +1367,449 @@
     document.getElementById("photoPreviewContainer").style.display = "none";
   }
 
-  // Submission
-  async function handleFormSubmit(event) {
-    event.preventDefault();
+  // =========================================================================
+  // 5. SUBMISSION LOGIC WITH AUTOMATIC INDEXEDDB OFFLINE CACHING & RETRY QUEUE
+  // =========================================================================
+  function collectFormDataPayload() {
+    const questionsPayload = [];
+    const targetSheetName = currentSchema["sheet-name"] || currentSchema.sheetName || "Shop Surveys";
+    let serialNumVal = "";
+    let shopNameVal = "";
 
-    const endpointUrl = document.getElementById("scriptEndpointUrl").value.trim();
-    if (!endpointUrl) {
-      showAlert("error", "Missing Endpoint", "Please expand Endpoint Settings and paste your Google Apps Script Web App URL first.");
-      toggleConfig(true);
-      return;
+    for (let field of currentSchema.fields) {
+      if (field.id === "serialNumber" || field.type === "auto_serial") {
+        const serialEl = document.getElementById(`field_${field.id}`);
+        serialNumVal = serialEl ? serialEl.value.trim() : getNextSerialNumberPreview();
+        questionsPayload.push({
+          id: field.id,
+          label: field.label,
+          value: serialNumVal
+        });
+      } else if (field.type === "location") {
+        if (field.required && (!gpsCoords.latitude || !gpsCoords.longitude)) {
+          showNotification("error", "Location Required", "Please tap 'Capture phone GPS' to record your device coordinates.");
+          return null;
+        }
+        questionsPayload.push({
+          id: field.id,
+          label: field.label,
+          value: gpsCoords.latitude ? `${gpsCoords.latitude}, ${gpsCoords.longitude}` : ""
+        });
+      } else if (field.type === "photo") {
+        if (field.required && !capturedBase64) {
+          showNotification("error", "Photo Required", "Please take or attach a shop picture before submitting.");
+          return null;
+        }
+        questionsPayload.push({
+          id: field.id,
+          label: field.label,
+          value: capturedBase64 ? "Photo Attached" : "None"
+        });
+      } else {
+        const el = document.getElementById(`field_${field.id}`);
+        const val = el ? el.value.trim() : "";
+        if (field.required && !val) {
+          showNotification("error", "Validation Error", `Please fill in required field: ${field.label}`);
+          if (el) el.focus();
+          return null;
+        }
+        if (field.id === "shopName" || field.label.toLowerCase().includes("shop")) {
+          shopNameVal = val;
+        }
+        questionsPayload.push({
+          id: field.id,
+          label: field.label,
+          value: val
+        });
+      }
     }
 
-    const surveyorName = document.getElementById("surveyorName").value.trim();
-    const siteName = document.getElementById("siteName").value.trim();
-    const conditionRating = document.getElementById("conditionRating").value;
-    const observations = document.getElementById("observations").value.trim();
+    const submissionId = "sub_" + Date.now() + "_" + Math.random().toString(36).substr(2, 5);
 
-    if (!surveyorName || !siteName || !conditionRating) {
-      showAlert("error", "Validation Error", "Please fill in all required survey questions.");
-      return;
-    }
-
-    // Prepare JSON payload
-    const payload = {
-      surveyorName: surveyorName,
-      surveyAnswers: {
-        siteName: siteName,
-        conditionRating: conditionRating,
-        observations: observations
-      },
+    return {
+      id: submissionId,
+      timestamp: Date.now(),
+      displayDate: new Date().toLocaleString(),
+      "sheet-name": targetSheetName,
+      sheetName: targetSheetName,
+      serialNumber: serialNumVal,
+      shopName: shopNameVal || serialNumVal || "Shop Survey",
+      questions: questionsPayload,
       latitude: gpsCoords.latitude,
       longitude: gpsCoords.longitude,
       accuracy: gpsCoords.accuracy,
       photoBase64: capturedBase64,
       photoName: capturedPhotoName,
-      photoMimeType: capturedPhotoMime
+      photoMimeType: capturedPhotoMime,
+      status: "pending",
+      lastError: null,
+      attempts: 0
     };
+  }
 
-    // UI state during upload
+  // Handle Form Submit
+  async function handleFormSubmit(event) {
+    if (event) event.preventDefault();
+
+    const payload = collectFormDataPayload();
+    if (!payload) return; // Validation failed
+
+    const endpointUrl = document.getElementById("scriptEndpointUrl").value.trim();
+
+    // Check if offline or no endpoint
+    if (!navigator.onLine || !endpointUrl) {
+      payload.status = "offline_pending";
+      payload.lastError = !endpointUrl ? "Apps Script endpoint URL is not configured." : "Device is currently offline.";
+      await savePendingSubmissionToDB(payload);
+      lastFailedSubmissionId = payload.id;
+
+      showNotification(
+        "error",
+        "Saved to Offline Drafts & Pending Queue 💾",
+        "Device is offline or endpoint is unset. Record has been safely stored in IndexedDB. You can retry anytime from the 'Drafts / Pending' tab."
+      );
+      document.getElementById("retryContainer").style.display = "block";
+      resetFormAfterSave();
+      return;
+    }
+
+    // Attempt Network Upload
     const submitBtn = document.getElementById("submitBtn");
     const submitBtnText = document.getElementById("submitBtnText");
     const submitBtnSpinner = document.getElementById("submitBtnSpinner");
 
     submitBtn.disabled = true;
-    submitBtnText.textContent = "Uploading to Drive & Sheets...";
+    submitBtnText.textContent = `Publishing to "${payload.sheetName}"...`;
     submitBtnSpinner.style.display = "inline-block";
 
     try {
-      // Standard Apps Script POST request.
-      // Note: Google Apps Script Web Apps handle redirects.
       const response = await fetch(endpointUrl, {
         method: "POST",
-        headers: {
-          "Content-Type": "text/plain;charset=utf-8" // Avoid browser preflight OPTIONS rejection in Apps Script
-        },
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
         body: JSON.stringify(payload)
       });
 
       const result = await response.json();
 
       if (result.status === "success") {
-        showAlert(
+        incrementSerialNumber();
+        lastFailedSubmissionId = null;
+        document.getElementById("retryContainer").style.display = "none";
+
+        showNotification(
           "success",
-          "Survey Recorded Successfully! 🎉",
-          `Data saved to Google Sheets. File uploaded to Google Drive.`,
+          "Survey Published Successfully! 🎉",
+          `Record published to Google Sheet: "${result.sheetName || payload.sheetName}". Serial: ${result.serialNumber || payload.serialNumber}.`,
           result.driveUrl,
           result.mapsUrl
         );
 
-        // Reset questionnaire form
-        document.getElementById("surveyForm").reset();
-        clearPhoto();
-        document.getElementById("locationDisplay").style.display = "none";
-        gpsCoords = { latitude: null, longitude: null, accuracy: null };
+        resetFormAfterSave();
       } else {
-        throw new Error(result.message || "Script returned failure status");
+        throw new Error(result.message || "Apps Script rejected submission.");
       }
+
     } catch (err) {
-      showAlert("error", "Submission Error", `Failed to send survey: ${err.message}. Please check your Web App URL and deployment permissions (must be set to 'Anyone').`);
+      // CACHE FAILED SUBMISSION INTO INDEXEDDB DRAFTS QUEUE
+      payload.status = "failed";
+      payload.lastError = err.message;
+      payload.attempts = (payload.attempts || 0) + 1;
+      await savePendingSubmissionToDB(payload);
+      lastFailedSubmissionId = payload.id;
+
+      document.getElementById("retryContainer").style.display = "block";
+      showNotification(
+        "error",
+        "Could Not Publish: Cached in Drafts Queue ⚠️",
+        `Error: ${err.message}. Your complete survey data (including GPS & photo) is safely cached in IndexedDB. Tap 'Retry' or visit the Drafts tab.`
+      );
     } finally {
       submitBtn.disabled = false;
-      submitBtnText.textContent = "📤 Submit Field Survey";
+      submitBtnText.textContent = "📤 Submit Record to Google Sheet";
       submitBtnSpinner.style.display = "none";
     }
   }
 
-  function showAlert(type, title, message, driveUrl, mapsUrl) {
+  // Save manual draft without attempting upload
+  async function saveAsManualDraft() {
+    const payload = collectFormDataPayload();
+    if (!payload) return;
+    payload.status = "draft";
+    payload.lastError = "Draft saved manually";
+    await savePendingSubmissionToDB(payload);
+    showNotification("success", "Draft Saved Locally 💾", "Survey saved to your Drafts / Pending queue.");
+    resetFormAfterSave();
+    switchMainView("drafts");
+  }
+
+  function resetFormAfterSave() {
+    document.getElementById("dynamicSurveyForm").reset();
+    clearPhoto();
+    gpsCoords = { latitude: null, longitude: null, accuracy: null };
+    const view = document.getElementById("locCoordinatesView");
+    if (view) view.style.display = "none";
+    const badge = document.getElementById("locStatusBadge");
+    if (badge) {
+      badge.className = "badge badge-warning";
+      badge.textContent = "Not captured";
+    }
+    renderCurrentSchemaForm();
+  }
+
+  // Retry upload for the last failed submission
+  async function retryLastSubmission() {
+    if (!lastFailedSubmissionId) {
+      handleFormSubmit();
+      return;
+    }
+    const all = await getAllPendingFromDB();
+    const item = all.find(x => x.id === lastFailedSubmissionId);
+    if (item) {
+      uploadSingleQueuedSubmission(item);
+    } else {
+      handleFormSubmit();
+    }
+  }
+
+  // Upload single item from drafts queue
+  async function uploadSingleQueuedSubmission(item, buttonEl) {
+    const endpointUrl = document.getElementById("scriptEndpointUrl").value.trim();
+    if (!endpointUrl) {
+      showNotification("error", "Missing Endpoint", "Please configure your Google Apps Script Web App URL first.");
+      togglePanel("endpointPanel", true);
+      return;
+    }
+
+    if (!navigator.onLine) {
+      showNotification("error", "Offline", "Your device is currently offline. Connect to internet before syncing.");
+      return;
+    }
+
+    if (buttonEl) {
+      buttonEl.disabled = true;
+      buttonEl.innerHTML = `<span class="spinner" style="border-top-color:#333; width:14px; height:14px;"></span> Syncing...`;
+    }
+
+    try {
+      const response = await fetch(endpointUrl, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(item)
+      });
+      const result = await response.json();
+
+      if (result.status === "success") {
+        await removePendingFromDB(item.id);
+        renderDraftsQueueView();
+        showNotification(
+          "success",
+          "Queued Item Published! 🎉",
+          `Record "${item.serialNumber || item.shopName}" published to sheet "${result.sheetName || item.sheetName}".`,
+          result.driveUrl,
+          result.mapsUrl
+        );
+      } else {
+        throw new Error(result.message || "Script execution failed");
+      }
+    } catch (err) {
+      item.lastError = err.message;
+      item.status = "failed";
+      item.attempts = (item.attempts || 0) + 1;
+      await savePendingSubmissionToDB(item);
+      renderDraftsQueueView();
+      showNotification("error", "Sync Failed", `Could not publish "${item.serialNumber}": ${err.message}`);
+    } finally {
+      if (buttonEl) {
+        buttonEl.disabled = false;
+        buttonEl.innerHTML = `🚀 Upload Now`;
+      }
+    }
+  }
+
+  // Sync all pending submissions sequentially
+  async function syncAllPendingSubmissions() {
+    const list = await getAllPendingFromDB();
+    if (list.length === 0) {
+      showNotification("success", "Queue Empty", "No pending drafts to sync.");
+      return;
+    }
+
+    const endpointUrl = document.getElementById("scriptEndpointUrl").value.trim();
+    if (!endpointUrl) {
+      showNotification("error", "Missing Endpoint", "Please configure your Google Apps Script URL first.");
+      togglePanel("endpointPanel", true);
+      return;
+    }
+
+    if (!navigator.onLine) {
+      showNotification("error", "Device Offline", "Cannot sync while offline. Please connect to the internet.");
+      return;
+    }
+
+    const syncBtn = document.getElementById("syncAllBtn");
+    syncBtn.disabled = true;
+
+    let successCount = 0;
+    let failCount = 0;
+
+    for (let i = 0; i < list.length; i++) {
+      const item = list[i];
+      syncBtn.textContent = `Syncing ${i + 1}/${list.length}...`;
+
+      try {
+        const response = await fetch(endpointUrl, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(item)
+        });
+        const result = await response.json();
+
+        if (result.status === "success") {
+          await removePendingFromDB(item.id);
+          successCount++;
+        } else {
+          item.lastError = result.message || "Failed";
+          await savePendingSubmissionToDB(item);
+          failCount++;
+        }
+      } catch (err) {
+        item.lastError = err.message;
+        await savePendingSubmissionToDB(item);
+        failCount++;
+      }
+    }
+
+    syncBtn.disabled = false;
+    syncBtn.textContent = `⚡ Sync All Pending`;
+    renderDraftsQueueView();
+
+    if (failCount === 0) {
+      showNotification("success", "Sync Complete! 🎉", `All ${successCount} pending records were published to Google Sheets & Drive.`);
+    } else {
+      showNotification("error", "Sync Partial", `${successCount} published, ${failCount} failed. Failed items remain in queue.`);
+    }
+  }
+
+  // Render the Drafts & Pending Queue view
+  async function renderDraftsQueueView() {
+    const container = document.getElementById("draftsListContainer");
+    const items = await getAllPendingFromDB();
+
+    if (items.length === 0) {
+      container.innerHTML = `
+        <div style="text-align: center; padding: 40px 16px; color: var(--text-muted);">
+          <div style="font-size: 42px; margin-bottom: 8px;">📭</div>
+          <h3 style="font-size: 1rem; color: var(--text); margin-bottom: 4px;">Queue is Empty</h3>
+          <p style="font-size: 0.85rem;">All surveys have been synced to Google Sheets. Any offline or failed submissions will automatically appear here.</p>
+        </div>
+      `;
+      return;
+    }
+
+    container.innerHTML = "";
+
+    items.forEach((item) => {
+      const el = document.createElement("div");
+      el.className = "draft-item";
+
+      const photoHtml = item.photoBase64 ? `<img src="${item.photoBase64}" class="draft-thumb" alt="Shop Photo">` : `<div class="draft-thumb" style="display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:20px;">📷</div>`;
+
+      const statusBadge = item.status === "failed" 
+        ? `<span class="badge badge-error">Failed</span>` 
+        : (item.status === "draft" ? `<span class="badge badge-neutral">Draft</span>` : `<span class="badge badge-warning">Pending</span>`);
+
+      let summaryText = "";
+      if (item.questions && Array.isArray(item.questions)) {
+        summaryText = item.questions
+          .filter(q => q.value && q.id !== "photo" && q.id !== "shopPicture")
+          .slice(0, 3)
+          .map(q => `<strong>${q.label.replace(/^\d+\.\s*/, '')}:</strong> ${q.value}`)
+          .join(" • ");
+      }
+
+      el.innerHTML = `
+        <div class="draft-item-header">
+          <div>
+            <div class="draft-item-title">${item.serialNumber || item.shopName || "Survey Record"}</div>
+            <div class="draft-item-meta">Sheet: ${item.sheetName} • ${item.displayDate || new Date(item.timestamp).toLocaleString()}</div>
+          </div>
+          <div>${statusBadge}</div>
+        </div>
+
+        <div class="draft-body">
+          ${photoHtml}
+          <div class="draft-info">
+            <div style="margin-bottom: 4px;">${summaryText || "No preview data"}</div>
+            ${item.latitude ? `<div style="color:var(--text-muted); font-size:0.75rem;">📍 Lat: ${item.latitude.toFixed(4)}, Lng: ${item.longitude.toFixed(4)}</div>` : ''}
+            ${item.lastError ? `<div style="color:var(--error); font-size:0.75rem; margin-top:4px;">⚠️ ${item.lastError}</div>` : ''}
+          </div>
+        </div>
+
+        <div class="draft-actions">
+          <button class="btn-sm" style="color:var(--error); border-color:#fecaca;" onclick="deleteDraftItem('${item.id}')">🗑️ Delete</button>
+          <button class="btn-sm" onclick="loadDraftIntoForm('${item.id}')">✏️ Edit in Form</button>
+          <button class="btn-sm" style="background:var(--primary); color:white;" onclick="uploadSingleQueuedSubmission(${JSON.stringify(item).replace(/"/g, '&quot;')}, this)">🚀 Upload Now</button>
+        </div>
+      `;
+
+      container.appendChild(el);
+    });
+  }
+
+  async function deleteDraftItem(id) {
+    if (confirm("Delete this draft from offline queue?")) {
+      await removePendingFromDB(id);
+      renderDraftsQueueView();
+    }
+  }
+
+  async function loadDraftIntoForm(id) {
+    const items = await getAllPendingFromDB();
+    const item = items.find(x => x.id === id);
+    if (!item) return;
+
+    // Switch to survey view
+    switchMainView("survey");
+
+    // Populate fields
+    if (item.questions) {
+      item.questions.forEach(q => {
+        const input = document.getElementById(`field_${q.id}`);
+        if (input) input.value = q.value;
+      });
+    }
+
+    if (item.latitude && item.longitude) {
+      gpsCoords.latitude = item.latitude;
+      gpsCoords.longitude = item.longitude;
+      gpsCoords.accuracy = item.accuracy;
+      document.getElementById("latDisplay").textContent = item.latitude.toFixed(6);
+      document.getElementById("lngDisplay").textContent = item.longitude.toFixed(6);
+      document.getElementById("accDisplay").textContent = `±${item.accuracy || 0}m`;
+      document.getElementById("locCoordinatesView").style.display = "block";
+      const badge = document.getElementById("locStatusBadge");
+      if (badge) {
+        badge.className = "badge badge-success";
+        badge.textContent = "Restored from draft";
+      }
+    }
+
+    if (item.photoBase64) {
+      capturedBase64 = item.photoBase64;
+      capturedPhotoName = item.photoName || "restored_photo.jpg";
+      capturedPhotoMime = item.photoMimeType || "image/jpeg";
+      document.getElementById("photoPreview").src = capturedBase64;
+      document.getElementById("photoPreviewContainer").style.display = "block";
+    }
+
+    // Remove draft from queue since user is editing it
+    await removePendingFromDB(id);
+    renderDraftsQueueView();
+
+    showNotification("success", "Draft Loaded", `Loaded "${item.serialNumber}" into the form. Make any updates and submit.`);
+  }
+
+  function showNotification(type, title, message, driveUrl, mapsUrl) {
     const alert = document.getElementById("statusAlert");
     const alertTitle = document.getElementById("statusTitle");
     const alertMsg = document.getElementById("statusMessage");
